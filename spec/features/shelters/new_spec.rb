@@ -1,32 +1,37 @@
 require 'rails_helper'
 
-RSpec.describe "New Shelter", type: :feature do
-  describe "As a visitor when I go to the new shelter form" do
-    describe "i click on the new shelter link on the index page" do
-    it 'creates a new shelter' do
+RSpec.describe 'As a visitor when I visit Shelter index page', type: :feature do
+  before(:each) do
+    @raccoon_shelter = Shelter.create!(name: 'Raccoon Shelter', address: 'Raccoon Road', city: 'Raccoon State', state: 'Raccoon City', zip: '80237')
+    @dog_shelter = Shelter.create(name: 'Dog Shelter', address: 'Dog Road', city: 'Dog City', state: 'Dog State', zip: '80238')
+    @cat_shelter = Shelter.create(name: 'Cat Shelter', address: 'Cat Road', city: 'Cat City', state: 'Cat State', zip: '80239')
+  end
 
-      visit '/shelters'
+  it 'A new Shelter can be created' do
+    visit '/shelters'
 
-      click_on 'New Shelter'
+    expect(page).to have_link('New Shelter')
 
-      expect(current_path).to eq('/shelters/new')
+    click_link 'New Shelter'
 
-      fill_in 'name', with: "Santiago's Shelter"
-      fill_in 'addres', with: "12 street"
-      fill_in 'city', with: "lakewood"
-      fill_in 'state', with: "CO"
-      fill_in 'zip', with: 23817
+    expect(current_path).to eq('/shelters/new')
 
-      click_on 'Create'
+    name = 'Dragon Shelter'
+    address = 'Dragon Road'
+    city = 'Dragon City'
+    state = 'Dragon State'
+    zip = '80236'
 
-      expect(current_path).to eq('/shelters')
+    fill_in :name, with: name
+    fill_in :address, with: address
+    fill_in :city, with: city
+    fill_in :state, with: state
+    fill_in :zip, with: zip
 
-      expect(page).to have_content("Santiago's Shelter")
-      expect(page).to have_content("12 street")
-      expect(page).to have_content("lakewood")
-      expect(page).to have_content("CO")
-      expect(page).to have_content(23817)
-      end
-    end
+    click_on 'Submit'
+
+    expect(current_path).to eq('/shelters')
+
+    expect(page).to have_content(name)
   end
 end

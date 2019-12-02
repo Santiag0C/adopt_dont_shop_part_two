@@ -1,7 +1,11 @@
 <h1><%= @pet.name %></h1>
-  <p><%= @pet.description %></p>
-  <p><%= @pet.approximate_age %></p>
-  <p><%= @pet.sex %></p>
-  <p><%= @pet.status %></p>
-  <p> <%= @pet.shelter.name %> </p>
-  <img src= <%= @pet.image %>>
+
+  <img src= <%= @pet.image %>></img>
+  <p>Name: <%= link_to "#{@pet.name}", "/pets/#{@pet.id}" %></p>
+  <p>Description: <%= @pet.description %></p>
+  <p>Age: <%= @pet.age %></p>
+  <p>Sex: <%= @pet.sex %></p>
+  <p>Status: <%= @pet.status %></p>
+
+  <h3> <%= link_to 'Update Pet', "/pets/#{@pet.id}/edit" %> </h3>
+<h3> <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %> </h3>

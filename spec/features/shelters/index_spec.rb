@@ -1,29 +1,64 @@
 require 'rails_helper'
 
-RSpec.describe "shelters index page", type: :feature do
-  it "can see all shelters names" do
+RSpec.describe 'As a visitor when I visit /shelters', type: :feature do
+  before(:each) do
+    @raccoon_shelter = Shelter.create(name: 'Raccoon Shelter', address: 'Raccoon Road', city: 'Raccoon State', state: 'Raccoon City', zip: '80237')
+    @dog_shelter = Shelter.create(name: 'Dog Shelter', address: 'Dog Road', city: 'Dog City', state: 'Dog State', zip: '80238')
+    @cat_shelter = Shelter.create(name: 'Cat Shelter', address: 'Cat Road', city: 'Cat City', state: 'Cat State', zip: '80239')
+  end
 
-    shelter_1 = Shelter.create(name: "saint.J sheleter",
-                              addres: "123 street",
-                              city: "lakewood",
-                              state: "CO",
-                              zip: "29132")
-    shelter_2 = Shelter.create(name: "saint.P sheleter",
-                              addres: "523 street",
-                              city: "lakewood",
-                              state: "CO",
-                              zip: "29132")
-    shelter_3 = Shelter.create(name: "saint.G sheleter",
-                              addres: "132 street",
-                              city: "lakewood",
-                              state: "CO",
-                              zip: "29132")
+  it 'shows the name of each shelter in the system' do
+    visit '/shelters'
 
-    visit "/shelters"
+    expect(page).to have_content(@raccoon_shelter.name)
+    expect(page).to have_content(@dog_shelter.name)
+    expect(page).to have_content(@cat_shelter.name)
+  end
 
-    expect(page).to have_content(shelter_1.name)
-    expect(page).to have_content(shelter_2.name)
-    expect(page).to have_content(shelter_3.name)
+  it 'There is a link to edit each shelter on the index page' do
+    visit '/shelters'
 
+    within "#shelter-#{@raccoon_shelter.id}" do
+      expect(page).to have_content(@raccoon_shelter.name)
+
+      expect(page).to have_link('Update Shelter')
+
+      click_on ('Update Shelter')
+    end
+
+      expect(current_path).to eq("/shelters/#{@raccoon_shelter.id}")
+  end
+
+  it 'There is a link to delete each shelter on the index page' do
+    visit '/shelters'
+
+    within "#shelter-#{@raccoon_shelter.id}" do
+      expect(page).to have_content(@raccoon_shelter.name)
+      expect(page).to have_link('Delete Shelter')
+
+      click_on 'Delete Shelter'
+    end
+
+      expect(current_path).to eq('/shelters')
+
+      expect(page).to_not have_content(@raccoon_shelter.name)
+  end
+
+  it 'can click on shelter name and go to shelter show page' do
+    visit '/shelters'
+
+    expect(page).to have_link(@raccoon_shelter.name)
+
+    click_on(@raccoon_shelter.name)
+
+    expect(current_path).to eq("/shelters/#{@raccoon_shelter.id}")
+  end
+
+  it 'has a home page /' do
+    visit '/'
+
+    expect(page).to have_link('Home')
+    expect(page).to have_link('Shelters')
+    expect(page).to have_link('Pets')
   end
 end

@@ -1,12 +1,11 @@
 class PetsController < ApplicationController
 
   def index
-    if params[:shelter_id]
-      @shelter = Shelter.find(params[:shelter_id])
-      @pets = @shelter.pets
-    else
-      @pets = Pet.all
-    end
+    @pets = Pet.all
+  end
+
+  def shelter_pets_index
+    @shelter = Shelter.find(params[:shelter_id])
   end
 
   def show
@@ -18,10 +17,11 @@ class PetsController < ApplicationController
   end
 
   def create
-    shelter = Shelter.find(params[:shelter_id])
-    shelter.pets.create!(pet_params)
+    @shelter = Shelter.find(params[:shelter_id])
+    # binding.pry
+    Pet.create(pet_params)
 
-    redirect_to "/shelters/#{shelter.id}/pets"
+    redirect_to "/shelters/#{@shelter.id}/pets"
   end
 
   def edit
@@ -29,20 +29,31 @@ class PetsController < ApplicationController
   end
 
   def update
-    pet = Pet.find(params[:id])
-    pet.update!(pet_params)
+    @pet = Pet.find(params[:id])
+    @pet.update({
+                 image: params[:image],
+                 name: params[:name],
+                 description: params[:description],
+                 age: params[:age],
+                 sex: params[:sex]
+      })
 
-    redirect_to "/pets/#{pet.id}"
+      @pet.save
+
+      redirect_to "/pets/#{@pet.id}"
   end
 
   def destroy
-    pet = Pet.find(params[:id])
-    pet.destroy
+    Pet.destroy(params[:id])
 
-    redirect_to "/pets"
+    redirect_to '/pets'
   end
 
-  def pet_par
-      params.permit(:image, :name, :description, :approximate_age, :sex)
+  ########### PRIVATE METHODS ###########
+
+private
+
+  def pet_params
+    params.permit(:image, :name, :description, :age, :sex, :status, :shelter_id)
   end
 end

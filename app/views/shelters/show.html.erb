@@ -1,10 +1,9 @@
-<%= link_to 'Index', "/shelters" %>
-<h2><%= @shelter.name %></h2>
-<p> <%= @shelter.addres %> </p>
-<p> <%= @shelter.city %> </p>
-<p> <%= @shelter.state %> </p>
-<p> <%= @shelter.zip %> </p>
-<%= link_to 'Edit', "/shelters/#{@shelter.id}/edit" %>
-<br>
-<br>
-<%= button_to 'Delete', "/shelters/#{@shelter.id}", method: :delete %>
+<h1> <%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %> </h1>
+<p>Address: <%= @shelter.address %></p>
+<p>City: <%= @shelter.city %></p>
+<p>State: <%= @shelter.state %></p>
+<p>Zip: <%= @shelter.zip %></p>
+
+<h3> <%= link_to 'Shelter Pets', "/shelters/#{@shelter.id}/pets" %> </h3>
+<h3> <%= link_to 'Update Shelter', "/shelters/#{@shelter.id}/edit" %> </h3>
+<h3> <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %> </h3>

@@ -1,22 +1,15 @@
-<%= form_tag '/shelters' do %>
-  <p>Name of Shelter</p>
-  <%= text_field_tag :name %>
-  <br>
-  <br>
-  <p>Addres</p>
-  <%= text_field_tag :addres %>
-  <br>
-  <br>
-  <p>City</p>
-  <%= text_field_tag :city %>
-  <br>
-  <br>
-  <p>State</p>
-  <%= text_field_tag :state %>
-  <br>
-  <br>
-  <p>Zip</p>
-  <%= text_field_tag :zip %>
+<h1>Create New Shelter</h1>
 
-  <%= submit_tag 'Create' %>
-<% end %>
+  <%= form_tag '/shelters', method: :post do %>
+    <p>Enter Shelter Name</p>
+    <%= text_field_tag :name %>
+    <p>Enter Shelter Address</p>
+    <%= text_field_tag :address %>
+    <p>Enter Shelter City</p>
+    <%= text_field_tag :city %>
+    <p>Enter Shelter State</p>
+    <%= text_field_tag :state %>
+    <p>Enter Shelter Zip</p>
+    <%= text_field_tag :zip %>
+    <%= submit_tag 'Submit' %>
+  <% end %>

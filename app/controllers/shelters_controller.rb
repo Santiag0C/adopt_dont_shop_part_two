@@ -1,4 +1,5 @@
 class SheltersController < ApplicationController
+
   def index
     @shelters = Shelter.all
   end
@@ -8,11 +9,13 @@ class SheltersController < ApplicationController
   end
 
   def new
+
   end
 
   def create
-    Shelter.create!(shelter_par)
-    redirect_to "/shelters"
+    Shelter.create(shelter_params)
+
+    redirect_to '/shelters'
   end
 
   def edit
@@ -20,21 +23,31 @@ class SheltersController < ApplicationController
   end
 
   def update
-    shelter = Shelter.find(params[:id])
-    shelter.update(shelter_par)
-
-    redirect_to "/shelters/#{shelter.id}"
+    @shelter = Shelter.find(params[:id])
+    @shelter.update({
+                     name: params[:name],
+                     address: params[:address],
+                     city: params[:city],
+                     state: params[:state],
+                     zip: params[:zip]
+      })
+    @shelter.save
+    redirect_to "/shelters/#{@shelter.id}"
   end
 
   def destroy
+    # binding.pry
     Shelter.destroy(params[:id])
 
     redirect_to '/shelters'
   end
 
+########### PRIVATE METHODS ###########
 
-  def shelter_par
-    param = params.permit(:name, :addres, :city, :state, :zip)
-    param
+private
+
+  def shelter_params
+    params.permit(:name, :address, :city, :state, :zip)
   end
+
 end

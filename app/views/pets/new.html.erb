@@ -1,21 +1,15 @@
-<%= form_tag "/shelters/#{@shelter.id}/pets" do %>
-  <p>Image</p>
-  <%= text_field_tag :image %><br/>
-  <br>
-  <br>
-  <p>Name</p>
-  <%= text_field_tag :name %><br/>
-  <br>
-  <br>
-  <p>Description</p>
-  <%= text_field_tag :description %><br/>
-  <br>
-  <br>
-  <p>Approximate age</p>
-  <%= text_field_tag :approximate_age %><br/>
-  <br>
-  <br>
-  <p>Sex</p>
-  <%= text_field_tag :sex %><br/>
-  <%= submit_tag 'Add' %>
+<h1>Add a New Adoptable Pet To A Shelter</h1>
+
+<%= form_tag "/shelters/#{@shelter.id}/pets", method: :post do %>
+  <p>Enter Pet Image URL</p>
+  <%= text_field_tag :image %>
+  <p>Enter Pet Name</p>
+  <%= text_field_tag :name %>
+  <p>Enter Pet Description</p>
+  <%= text_field_tag :description %>
+  <p>Enter Pet Approximate Age</p>
+  <%= text_field_tag :age %>
+  <p>Enter Pet Sex (Female or Male)</p>
+  <%= text_field_tag :sex %>
+  <%= submit_tag 'Submit' %>
 <% end %>
