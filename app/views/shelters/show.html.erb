@@ -14,3 +14,4 @@
   <%= review.content %>
   <img src= <%= review.picture %>> </img>
 <% end %>
+<%= button_to 'Create Review', "/shelters/#{@shelter.id}/review/new", method: :get%>
