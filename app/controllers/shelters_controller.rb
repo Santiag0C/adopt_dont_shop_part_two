@@ -36,7 +36,7 @@ class SheltersController < ApplicationController
   end
 
   def destroy
-    # binding.pry
+
     Shelter.destroy(params[:id])
 
     redirect_to '/shelters'

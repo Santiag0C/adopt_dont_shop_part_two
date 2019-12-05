@@ -118,7 +118,6 @@ RSpec.describe 'As a User', type: :feature do
     visit "/shelters/#{@raccoon_shelter.id}/pets"
 
     within "#pet-#{@elena.id}" do
-      # binding.pry
       expect(page).to have_css("img[src*='https://imgix.ranker.com/user_node_img/50070/1001387908/original/1-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces']")
       expect(page).to have_content(@elena.shelter.id)
       expect(page).to have_content(@elena.name)

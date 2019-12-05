@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <title>AdoptDontShop</title>
     <%= csrf_meta_tags %>
 
@@ -11,10 +10,14 @@
 
   <body>
     <nav>
-        <%= link_to 'Home', '/' %> |
-        <%= link_to 'Shelters', '/shelters' %> |
-        <%= link_to 'Pets', '/pets' %>
+      <%= link_to 'Home', '/' %>
+      <%= link_to 'Shelters', '/shelters' %>
+      <%= link_to 'Pets', '/pets' %>
+      <%= "Favorites: #{favorites.total_count}" %>
     </nav>
+    <% flash.each do |type, message| %>
+      <h3><%= message %></h3>
+    <% end %>
     <%= yield %>
   </body>
 </html>
