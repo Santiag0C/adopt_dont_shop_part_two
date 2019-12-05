@@ -38,10 +38,4 @@ RSpec.describe 'As a User', type: :feature do
 
     expect(current_path).to eq("/pets/#{@elena.id}")
   end
-
-#   User Story 18, Pet Links
-#
-# As a visitor
-# When I click on the name a pet anywhere on the site
-# Then that link takes me to that Pet's show page
 end

@@ -23,6 +23,9 @@ get '/', to: 'home#index'
   patch '/pets/:id', to: 'pets#update'
   delete '/pets/:id', to: 'pets#destroy'
 
-  get '/shelters/:id/review/new', to: 'reviews#new'
+  get '/shelters/:id/reviews/new', to: 'reviews#new'
   post '/shelters/:id', to: 'reviews#create'
+  get '/shelters/:id/reviews/:id/edit', to: 'reviews#edit'
+  patch '/shelters/:id/reviews/:id', to: 'reviews#update'
+  delete '/shelters/:id/reviews/:id/delete', to: 'reviews#destroy'
 end
