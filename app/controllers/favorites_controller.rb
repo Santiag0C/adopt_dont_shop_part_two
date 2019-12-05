@@ -12,6 +12,7 @@ class FavoritesController < ApplicationController
     session[:favorites] ||= Hash.new
     session[:favorites][pet_id_str] ||= 0
     session[:favorites][pet_id_str] = session[:favorites][pet_id_str] + 1
+    flash[:success] = "#{pet.name} has been favorited #{session[:favorites][pet_id_str]}"
     redirect_to "/pets/#{pet.id}"
   end
 

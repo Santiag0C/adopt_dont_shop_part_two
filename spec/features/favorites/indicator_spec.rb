@@ -25,4 +25,11 @@ RSpec.describe 'Favorite Indicator in Nav Bar', type: :feature do
     click_button('Favorite!')
     expect(page).to have_content('Favorites: 2')
   end
+
+  it 'displays a flash message indicating that the pet has been favorited' do
+    visit "/pets/#{@elena.id}"
+
+    click_button('Favorite')
+    expect(page).to have_content("#{@elena.name} has been favorited")
+  end
 end
