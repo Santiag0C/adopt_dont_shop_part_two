@@ -32,4 +32,12 @@ RSpec.describe 'Favorite Indicator in Nav Bar', type: :feature do
     click_button('Favorite')
     expect(page).to have_content("#{@elena.name} has been favorited")
   end
+
+  it 'Can click on favorites in the nav_bar and be redirected to favorites index /favorites' do
+    visit '/'
+
+    click_on('Favorites')
+
+    expect(current_path).to eq('/favorites')
+  end
 end
