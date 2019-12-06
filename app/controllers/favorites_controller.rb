@@ -1,9 +1,14 @@
 class FavoritesController < ApplicationController
 
   def index
-    @pets = Pet.all
-    # @pet = pet.find(params[:pet_id])
     @favorites = Favorite.new(session[:favorites])
+    
+    pet_id = @favorites.keys_to_i
+
+    @pets = []
+    pet_id.each do |id|
+      @pets.push(Pet.find(id))
+    end
   end
 
   def update
