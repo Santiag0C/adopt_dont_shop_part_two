@@ -16,8 +16,4 @@ class Favorite
     end
     pet_id_int
   end
-
-  def favorite_or_delete_button
-
-  end
 end
