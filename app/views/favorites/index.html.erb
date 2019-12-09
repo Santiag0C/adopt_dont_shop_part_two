@@ -8,3 +8,4 @@
       <%= link_to 'Unfavorite!', "/favorites/#{pet.id}", method: :delete %>
     <% end %>
 <% end %>
+<%= button_to 'Remove all Favorites!', "/favorites", method: :delete %>
