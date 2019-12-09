@@ -26,16 +26,13 @@ class FavoritesController < ApplicationController
     # keys_to_i(favorites.contents)
     favorites.contents.delete(params[:pet_id])
     flash[:notice] = "This Pet has been Unfavorited!"
-    redirect_to "/pets/#{params[:pet_id]}"
+    redirect_back(fallback_location: '/favorites')
+    # redirect_to "/pets/#{params[:pet_id]}"
   end
 
-  def destroy_favorite
-    # keys_to_i(favorites.contents)
-    # @favorites.contents.delete(params[:pet_id])
-    # @pets
-    # keys_to_i(favorites.contents).delete(params[:pet_id])
-    # binding.pry
-    # redirect_to '/favorites'
+  def delete_all
+    favorites.contents.clear
+    redirect_to '/favorites'
   end
 
 end
