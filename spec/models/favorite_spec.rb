@@ -18,13 +18,12 @@ RSpec.describe Favorite, type: :model do
 #   describe 'total_count' do
 #     it 'counts all favorites session is holding' do
 #       favorite = Favorite.new({1 => 1, 2 => 1})
-#       # binding.pry
 #       expect(favorite.total_count).to eq(2)
 #     end
 #   end
   describe 'something' do
     it 'favorite_or_delete method' do
-      
+
     end
   end
 end

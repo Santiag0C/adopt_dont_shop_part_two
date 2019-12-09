@@ -2,9 +2,8 @@ class FavoritesController < ApplicationController
 
   def index
     @favorites = Favorite.new(session[:favorites])
-    # binding.pry
 
-    pet_id = @favorites.keys_to_i
+    pet_id = keys_to_i(@favorites.contents)
 
     @pets = []
     pet_id.each do |id|
@@ -23,9 +22,10 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    favorites
-    # favorites.delete(params[:pet_id])
-    binding.pry
+    keys_to_i(favorites.contents)
+    @favorites.contents.delete(params[:pet_id])
+    flash[:notice] = "This Pet has been Unfavorited!"
+    redirect_to "/pets/#{params[:pet_id]}"
   end
 
 end

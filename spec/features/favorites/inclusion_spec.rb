@@ -18,16 +18,15 @@ RSpec.describe 'As A Visitor when I go to /pets/:id', type: :feature do
     click_on('Favorite!')
 
     expect(page).to have_content('Favorites: 1')
-  # binding.pry
     expect(page).to_not have_button('Favorite!')
     expect(page).to have_button('Unfavorite!')
 
     click_on('Unfavorite!')
 
-    expect(current_path).to eq("/favorites/#{@elena.id}")
+    expect(current_path).to eq("/pets/#{@elena.id}")
     expect(page).to have_button('Favorite!')
     expect(page).to have_content('Favorites: 0')
-    expect(page).to have_content("#{@elena.name} has been removed from favorites!")
+    expect(page).to have_content("This Pet has been Unfavorited!")
   end
 
 # As a visitor
