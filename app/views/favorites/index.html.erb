@@ -1,6 +1,10 @@
-<h1>Favorites!</h1>
-
-  <% @pets.each do |pet|%>
-    <img src = <%= pet.image %>> </img>
-    <%= link_to "#{pet.name}", "/pets/#{pet.id}", method: :get %>
-  <% end %>
+<% if favorites.contents.count == 0 %>
+  <h1>No Favorites!</h1>
+  <% else %>
+  <h1>Favorites!</h1>
+    <% @pets.each do |pet|%>
+      <img src = <%= pet.image %>> </img>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}", method: :get %>
+      <%= link_to 'Unfavorite!', "/favorites/#{pet.id}", method: :delete %>
+    <% end %>
+<% end %>

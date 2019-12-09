@@ -12,26 +12,29 @@ RSpec.describe 'As A Visitor when I go to /favorites', type: :feature do
     @goblin = @cat_shelter.pets.create(image: 'https://static.boredpanda.com/blog/wp-content/uploads/2016/02/big-cute-eyes-cat-black-scottish-fold-gimo-1room1cat-fb__700-png.jpg', name: 'Goblin', age: 5, sex: 'Female')
   end
 
-  it 'all pets that I have favorited have a link to their show page via name and an image ' do
+  it 'I can unfavorite each pet which redirects me back to /favorites' do
     visit "/pets/#{@elena.id}"
-    click_on('Favorite!')
-
-    visit "/pets/#{@raccoon.id}"
-    click_on('Favorite!')
+    click_on 'Favorite!'
 
     visit '/favorites'
+    # save_and_open_page
+    expect(page).to have_link('Unfavorite!')
+    click_on 'Unfavorite!'
 
-    expect(page).to have_css("img[src*='https://imgix.ranker.com/user_node_img/50070/1001387908/original/1-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces']")
-    expect(page).to have_link(@elena.name)
-
-    expect(page).to have_link(@raccoon.name)
-
-    click_on(@elena.name)
-    expect(current_path).to eq("/pets/#{@elena.id}")
-  end
-
-  it 'If there are no favorites I am prompted that there are no favorites' do
+    # expect(current_path).to eq("/favorites/#{@elena.id}")
     visit '/favorites'
-    expect(page).to have_content('No Favorites!')
+    # save_and_open_page
+    # expect(page).to_not have_content(@elena.name)
+
+    #   User Story 13, Remove a Favorite from Favorites Page
+    #
+    # As a visitor
+    # When I have added pets to my favorites list
+    # And I visit my favorites page ("/favorites")
+    # Next to each pet, I see a button or link to remove that pet from my favorites
+    # When I click on that button or link to remove a favorite
+    # A delete request is sent to "/favorites/:pet_id"
+    # And I'm redirected back to the favorites page where I no longer see that pet listed
+    # And I also see that the favorites indicator has decremented by 1
   end
 end

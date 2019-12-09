@@ -9,6 +9,7 @@ class FavoritesController < ApplicationController
     pet_id.each do |id|
       @pets.push(Pet.find(id))
     end
+    # binding.pry
   end
 
   def update
@@ -22,10 +23,19 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    keys_to_i(favorites.contents)
-    @favorites.contents.delete(params[:pet_id])
+    # keys_to_i(favorites.contents)
+    favorites.contents.delete(params[:pet_id])
     flash[:notice] = "This Pet has been Unfavorited!"
     redirect_to "/pets/#{params[:pet_id]}"
+  end
+
+  def destroy_favorite
+    # keys_to_i(favorites.contents)
+    # @favorites.contents.delete(params[:pet_id])
+    # @pets
+    # keys_to_i(favorites.contents).delete(params[:pet_id])
+    # binding.pry
+    # redirect_to '/favorites'
   end
 
 end
