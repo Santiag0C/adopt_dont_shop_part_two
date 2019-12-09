@@ -22,6 +22,7 @@ RSpec.describe 'As A Visitor when I go to /favorites', type: :feature do
     click_on 'Unfavorite!'
 
     # expect(current_path).to eq("/favorites/#{@elena.id}")
+    expect(current_path).to eq('/favorites')
     visit '/favorites'
     # save_and_open_page
     # expect(page).to_not have_content(@elena.name)
@@ -36,5 +37,26 @@ RSpec.describe 'As A Visitor when I go to /favorites', type: :feature do
     # A delete request is sent to "/favorites/:pet_id"
     # And I'm redirected back to the favorites page where I no longer see that pet listed
     # And I also see that the favorites indicator has decremented by 1
+  end
+
+  it 'A user can remove all favorites from the favorites page' do
+    visit "/pets/#{@elena.id}"
+    click_on('Favorite!')
+    visit "/pets/#{@foxy.id}"
+    click_on('Favorite!')
+    visit '/favorites'
+
+    expect(page).to have_content(@elena.name)
+    expect(page).to have_content(@foxy.name)
+    expect(page).to have_content('Favorites: 2')
+    # expect(page).to have_link('Remove all Favorites!')
+    expect(page).to have_button('Remove all Favorites!')
+
+    click_on('Remove all Favorites!')
+
+    # expect(current_path).to eq('/favorites/delete')
+    expect(page).to_not have_content(@elena.name)
+    expect(page).to_not have_content(@foxy.name)
+    expect(page).to have_content('Favorites: 0')
   end
 end
