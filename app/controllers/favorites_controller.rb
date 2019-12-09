@@ -2,7 +2,8 @@ class FavoritesController < ApplicationController
 
   def index
     @favorites = Favorite.new(session[:favorites])
-    
+    # binding.pry
+
     pet_id = @favorites.keys_to_i
 
     @pets = []
@@ -19,6 +20,12 @@ class FavoritesController < ApplicationController
     session[:favorites][pet_id_str] = session[:favorites][pet_id_str] + 1
     flash[:success] = "#{pet.name} has been favorited"
     redirect_to "/pets/#{pet.id}"
+  end
+
+  def destroy
+    favorites
+    # favorites.delete(params[:pet_id])
+    binding.pry
   end
 
 end

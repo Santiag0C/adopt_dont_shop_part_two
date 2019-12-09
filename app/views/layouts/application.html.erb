@@ -13,8 +13,9 @@
       <%= link_to 'Home', '/' %>
       <%= link_to 'Shelters', '/shelters' %>
       <%= link_to 'Pets', '/pets' %>
-      <%= link_to "Favorites: #{favorites.total_count}", "/favorites", method: :get %> 
+      <%= link_to "Favorites: #{favorites.total_count}", "/favorites", method: :get %>
     </nav>
+
     <% flash.each do |type, message| %>
       <h3><%= message %></h3>
     <% end %>
