@@ -1,0 +1,9 @@
+<h1>Pets For Adoption</h1>
+
+<% @pets.each do |pet| %>
+  <% if pet.applications.empty? %>
+    <p><%= pet.name %> Does not have any applications.</p>
+  <% else %>
+    <%= pet.name %>
+  <% end %>
+<% end %>
