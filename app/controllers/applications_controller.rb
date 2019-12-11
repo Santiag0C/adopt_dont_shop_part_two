@@ -1,5 +1,8 @@
 class ApplicationsController < ApplicationController
 
+  def show
+  end
+
   def new
     pet_id = keys_to_i(favorites.contents)
 
