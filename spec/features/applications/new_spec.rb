@@ -43,8 +43,7 @@ RSpec.describe 'As A Visitor', type: :feature do
     fill_in :zip, with: zip
     fill_in :phone_number, with: phone_number
     fill_in :description, with: description
-    find("#checkbox-#{@elena.name}").set(true)
-
+    # find("#checkbox-#{@elena.name}").set(true)
     # check("pet_ids")
 
     click_on 'Submit Application'
