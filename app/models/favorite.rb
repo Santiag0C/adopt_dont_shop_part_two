@@ -1,5 +1,5 @@
 class Favorite
-  attr_reader :total_c
+  attr_reader :total_c, :hash
   def initialize(content)
     @total_c = content || Hash.new(0)
   end
@@ -12,5 +12,13 @@ class Favorite
   end
   def count_of(id)
     @total_c[id.to_s].to_i
+  end
+  def id_finder
+    @pets = Pet.all
+    hash = {}
+    @total_c.each do |key, val|
+    hash[@pets.find(key)]=1
+   end
+   return hash
   end
 end
