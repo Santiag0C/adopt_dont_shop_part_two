@@ -7,11 +7,16 @@
 <h6> <%= link_to 'Shelter Pets', "/shelters/#{@shelter.id}/pets" %> </h6>
 <h6> <%= link_to 'Update Shelter', "/shelters/#{@shelter.id}/edit" %> </h6>
 <h6> <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %> </h6>
+<br>
 <h2>Reviews</h2>
 <% @shelter.reviews.each do |review| %>
   <%= review.title %>
   <%= review.rating %>
   <%= review.content %>
   <img src= <%= review.picture %>> </img>
+  <h6> <%= link_to 'Edit Review', "/shelters/#{@shelter.id}/#{review.id}/edit" %> </h6>
+  <h6> <%= link_to 'Delete Review', "/shelters/#{@shelter.id}/#{review.id}", method: :delete%> </h6>
+
+  <br>
 <% end %>
 <%= button_to 'Create Review', "/shelters/#{@shelter.id}/review/new", method: :get%>

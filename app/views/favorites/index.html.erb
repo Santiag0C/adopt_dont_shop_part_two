@@ -1,0 +1,7 @@
+<h2>Your favorites</h2>
+
+
+<% @favorites.total_c.each do |key, val| %>
+  <img src= <%= @pets.find(key).image %>></img>
+  <%= link_to @pets.find(key).name, "/pets/#{@pets.find(key).id}"%>
+<% end %>

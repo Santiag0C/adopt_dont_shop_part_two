@@ -6,6 +6,10 @@
   <p>Age: <%= @pet.age %></p>
   <p>Sex: <%= @pet.sex %></p>
   <p>Status: <%= @pet.status %></p>
-
+  <% if favorites.total_c.key?(@pet.id.to_s) %>
+    <h4> <%= button_to 'Remove from Favorites', "/favorites/#{@pet.id}", method: :delete %> </h4>
+  <% else %>
+    <h4> <%= button_to 'Add to Favorites', "/pets/#{@pet.id}/favorites", method: :patch %> </h4>
+  <% end %>
   <h3> <%= link_to 'Update Pet', "/pets/#{@pet.id}/edit" %> </h3>
 <h3> <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %> </h3>

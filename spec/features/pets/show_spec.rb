@@ -39,6 +39,22 @@ RSpec.describe 'As a User', type: :feature do
     expect(current_path).to eq("/pets/#{@elena.id}")
   end
 
+  # it 'has a button to add a pet to favorite'
+  #
+  #   visit "/pets/#{@elena.id}"
+
+
+  # User Story 9, Favorite Creation
+  #
+  # # As a visitor
+  # # When I visit a pet's show page
+  # # I see a button or link to favorite that pet
+  # # When I click the button or link
+  # # I'm taken back to that pet's show page
+  # # I see a flash message indicating that the pet has been added to my favorites list
+  # # The favorite indicator in the nav bar has incremented by one
+
+
 #   User Story 18, Pet Links
 #
 # As a visitor
