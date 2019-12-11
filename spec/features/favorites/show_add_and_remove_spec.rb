@@ -18,9 +18,10 @@ RSpec.describe "after favoriting a pet" do
 
     click_button('Remove from Favorites')
 
-    # expect(page).to have_button('Add to Favorites')
+    expect(page).to have_content("You have unfavorited #{@elena.name} (¤﹏¤).")
 
     expect(page).to have_content('Favorites: 0')
+
 
   end
 end

@@ -27,6 +27,8 @@ get '/', to: 'home#index'
   get '/favorites', to: 'favorites#index'
   delete '/favorites/:id', to: 'favorites#destroy'
 
+  delete '/remove_all', to: 'favorites#destroy_all'
+
 
   get '/shelters/:id/review/new', to: 'reviews#new'
   post '/shelters/:id', to: 'reviews#create'
