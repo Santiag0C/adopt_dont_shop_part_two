@@ -3,10 +3,24 @@
   <% else %>
   <h1>Favorites!</h1>
     <% @pets.each do |pet|%>
+    <section id = "pet-<%= pet.id %>">
       <img src = <%= pet.image %>> </img>
       <%= link_to "#{pet.name}", "/pets/#{pet.id}", method: :get %>
+    </section>
       <%= link_to 'Unfavorite!', "/favorites/#{pet.id}", method: :delete %>
     <% end %>
 <% end %>
 <%= button_to 'Remove all Favorites!', "/favorites", method: :delete %>
 <%= button_to 'Adopt A Pet!', '/applications/new', method: :get %>
+<br>
+<br>
+<h1>Pet's with one or more application for Adoption!</h1>
+  <% if @pets_with_applications.nil?  %>
+    <h3>No Applications</h3>
+  <% else %>
+      <% @pets_with_applications.each do |pet_with_application| %>
+      <section id = "application-#<%= pet_with_application.id %> ">
+      <%= link_to pet_with_application.name, "/pets/#{pet_with_application.id}, method: :get" %>
+    </section>
+  <% end %>
+<% end %>

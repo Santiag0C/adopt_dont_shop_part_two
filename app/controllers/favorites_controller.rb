@@ -8,8 +8,9 @@ class FavoritesController < ApplicationController
     @pets = []
     pet_id.each do |id|
       @pets.push(Pet.find(id))
+    # @applied = ApplicationPet.select(:pet_id, :application_id).joins(:application)
     end
-    # binding.pry
+    @pets_with_applications = Pet.pets_with_applications
   end
 
   def update
