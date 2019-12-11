@@ -1,7 +1,13 @@
-<h2>Your favorites</h2>
 
+<% if @favorites.total_c == {} %>
+  <h2>You have no favorites</h2>
+<% else %>
+  <h2>Your favorites</h2>
+  <h4 align="center"> <%= link_to 'Unfavorite All', "/remove_all", method: :delete %> </h4>
 
-<% @favorites.total_c.each do |key, val| %>
-  <img src= <%= @pets.find(key).image %>></img>
-  <%= link_to @pets.find(key).name, "/pets/#{@pets.find(key).id}"%>
+  <% @favorites.id_finder.each do |key, val| %>
+    <img src= <%= key.image %>></img>
+    <%= link_to key.name, "/pets/#{key.id}"%>
+    <h5><%= link_to 'Remove from Favorite', "/favorites/#{key.id}", method: :delete %></h5>
+  <% end %>
 <% end %>
