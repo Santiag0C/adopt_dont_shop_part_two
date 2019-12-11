@@ -7,4 +7,8 @@ class Pet < ApplicationRecord
                         :age,
                         :sex,
                         :shelter
+
+  def self.pets_with_applications
+    Pet.joins(:applications)
+  end
 end
