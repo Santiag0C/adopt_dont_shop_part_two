@@ -1,0 +1,35 @@
+<h1>Pet Adoption Form</h1>
+
+<h3>Select the pet or pets you would like to apply for</h3>
+<%= form_tag "/applications", method: :post %>
+<%= pet_ids = Array.new %>
+<% @pets.each do |pet| %>
+  <%= label_tag pet.id %>
+  <%= link_to pet.name, "/pets/#{pet.id}" %>
+  <section id = "checkbox-#{pet.name}">  
+  <%= check_box_tag 'pet_ids[]', pet.id, false, :id => "checkbox-#{pet.id}" %>
+  </section>
+  <% end %>
+  <br>
+
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+
+  <%= label_tag :address %>
+  <%= text_field_tag :address %>
+
+  <%= label_tag :city %>
+  <%= text_field_tag :city %>
+
+  <%= label_tag :state %>
+  <%= text_field_tag :state %>
+
+  <%= label_tag :zip %>
+  <%= text_field_tag :zip %>
+
+  <%= label_tag :phone_number %>
+  <%= text_field_tag :phone_number %>
+
+  <%= label_tag :description %>
+  <%= text_field_tag :description %>
+<%= submit_tag 'Submit Application' %>
