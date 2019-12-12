@@ -8,5 +8,9 @@
   <p><%= @application.phone_number %></p>
   <p><%= @application.description %></p>
   <% @application.pets.each do |pet| %>
+  <%= form_tag "/applications/update", method: :patch %>
+    <% pet_ids = Array.new %>
     <%= link_to pet.name, "/pets/#{pet.id}", method: :get %>
+    <%= check_box_tag 'pet_ids[]', pet.id, false, :id => "checkbox-#{pet.id}" %>
   <% end %>
+  <%= submit_tag 'Approve Application' %>
