@@ -13,4 +13,8 @@
     <%= link_to pet.name, "/pets/#{pet.id}", method: :get %>
     <%= check_box_tag 'pet_ids[]', pet.id, false, :id => "checkbox-#{pet.id}" %>
   <% end %>
-  <%= submit_tag 'Approve Application' %>
+  <% if @application.pets[0].status == "pending" %>
+    <h3>This pet is has been approve already</h3>
+  <% else %>
+    <%= submit_tag 'Approve Application' %>
+  <% end %>
