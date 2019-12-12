@@ -1,31 +1,39 @@
 class FavoritesController < ApplicationController
+
   def index
-    @pets = Pet.all
     @favorites = Favorite.new(session[:favorites])
+
+    pet_id = keys_to_i(@favorites.contents)
+
+    @pets = []
+    pet_id.each do |id|
+      @pets.push(Pet.find(id))
+    # @applied = ApplicationPet.select(:pet_id, :application_id).joins(:application)
+    end
+    @pets_with_applications = Pet.pets_with_applications
   end
+
   def update
-    pet = Pet.find(params[:id])
-    @favorites = Favorite.new(session[:favorites])
-    @favorites.add_favorite(pet.id)
-    session[:favorites] = @favorites.total_c
-    @favorites.count_of(pet.id)
-    flash[:notice] = "You have added #{pet.name} to your favorites."
+    pet = Pet.find(params[:pet_id])
+    pet_id_str = pet.id.to_s
+    session[:favorites] ||= Hash.new
+    session[:favorites][pet_id_str] ||= 0
+    session[:favorites][pet_id_str] = session[:favorites][pet_id_str] + 1
+    flash[:success] = "#{pet.name} has been favorited"
     redirect_to "/pets/#{pet.id}"
   end
+
   def destroy
-    pet = Pet.find(params[:id])
-    @favorites = Favorite.new(session[:favorites])
-    @favorites.total_c.delete(pet.id.to_s)
-    flash[:notice] = "You have unfavorited #{pet.name} (¤﹏¤)."
-    if request.referrer.include?"favorites"
-      redirect_to "/favorites"
-    else
-      redirect_to "/pets/#{pet.id}"
-    end
+    # keys_to_i(favorites.contents)
+    favorites.contents.delete(params[:pet_id])
+    flash[:notice] = "This Pet has been Unfavorited!"
+    redirect_back(fallback_location: '/favorites')
+    # redirect_to "/pets/#{params[:pet_id]}"
   end
-  def destroy_all
-    @favorites = Favorite.new(session[:favorites])
-    @favorites.total_c.clear
-    redirect_to "/favorites"
+
+  def delete_all
+    favorites.contents.clear
+    redirect_to '/favorites'
   end
+
 end
