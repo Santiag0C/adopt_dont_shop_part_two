@@ -102,12 +102,20 @@ RSpec.describe 'As A Visitor', type: :feature do
     visit "pets/#{@elena.id}"
     expect(page).to have_link('David Gomez')
   end
-#   User Story 20, Pet Applications Index Page
-#
-# As a visitor
-# When I visit a pets show page
-# I see a link to view all applications for this pet
-# When I click that link
-# I can see a list of all the names of applicants for this pet
-# Each applicant's name is a link to their application show page
+
+  it 'can aprove an application and ' do
+    # expect(page).to have_content("Status: adoptable")
+\
+
+    visit "pets/#{@elena.id}"
+    click_on('David Gomez')
+    find("#checkbox-#{@elena.id}").set(true)
+    # click_on('Approve Application')
+    # click_on('David Gomez')
+    expect(page).to have_content("This pet is has been approve already")
+
+
+
+  end
+
 end
