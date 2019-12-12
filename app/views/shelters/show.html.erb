@@ -1,22 +1,27 @@
-<h1> <%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %> </h1>
+<section id = "shelter-<%= @shelter.id %>">
+  <h1> <%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %> </h1>
+</section>
 <p>Address: <%= @shelter.address %></p>
 <p>City: <%= @shelter.city %></p>
 <p>State: <%= @shelter.state %></p>
 <p>Zip: <%= @shelter.zip %></p>
-<br>
-<h6> <%= link_to 'Shelter Pets', "/shelters/#{@shelter.id}/pets" %> </h6>
-<h6> <%= link_to 'Update Shelter', "/shelters/#{@shelter.id}/edit" %> </h6>
-<h6> <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %> </h6>
-<br>
-<h2>Reviews</h2>
-<% @shelter.reviews.each do |review| %>
-  <%= review.title %>
-  <%= review.rating %>
-  <%= review.content %>
-  <img src= <%= review.picture %>> </img>
-  <h6> <%= link_to 'Edit Review', "/shelters/#{@shelter.id}/#{review.id}/edit" %> </h6>
-  <h6> <%= link_to 'Delete Review', "/shelters/#{@shelter.id}/#{review.id}", method: :delete%> </h6>
 
-  <br>
+<h3> <%= link_to 'Shelter Pets', "/shelters/#{@shelter.id}/pets" %> </h3>
+<h3> <%= link_to 'Update Shelter', "/shelters/#{@shelter.id}/edit" %> </h3>
+<h3> <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %> </h3>
+
+<section id = "shelter-1">
+  <h1>Reviews For: <%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %></h1>
+</section>
+<% @shelter.reviews.each do |review| %>
+<section id = "review-<%= review.id %>">
+  <p>Title: <%= review.title %></p>
+  <p>Rating: <%= review.rating %></p>
+  <p>Content: <%= review.content %></p>
+  <img src= <%= review.picture %>></img>
+  <%= link_to 'Edit Review', "/shelters/#{@shelter.id}/reviews/#{review.id}/edit", method: :get %>
+  <%= link_to 'Delete Review', "/shelters/#{@shelter.id}/reviews/#{review.id}/delete", method: :delete %>
+</section>
 <% end %>
-<%= button_to 'Create Review', "/shelters/#{@shelter.id}/review/new", method: :get%>
+
+<h3> <%= button_to 'New Review', "/shelters/#{@shelter.id}/reviews/new", method: :get %></h3>
