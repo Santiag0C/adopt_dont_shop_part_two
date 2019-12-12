@@ -6,48 +6,53 @@ class ReviewsController < ApplicationController
 
   def create
     @shelter = Shelter.find(params[:id])
-    # @shelter.reviews.create(review_params)
-    @shelter.reviews.new(review_params)
-    if @shelter.save
+    review = @shelter.reviews.new(review_params)
+    if review.save
       redirect_to "/shelters/#{@shelter.id}"
     else
-      flash[:notice] = "Review not created: Require information missing."
+      flash[:notice] = 'Review Not Created! Make Sure To Fill In Title, Rating, And Content!'
       render :new
     end
   end
+
   def edit
-    @shelter = Shelter.find(params[:id])
-    @review = Review.find(params[:review_id])
-    # binding.pry
+    @review = Review.find(params[:id])
+    @shelter = Shelter.find(@review.shelter_id)
   end
+
   def update
-    @shelter = Shelter.find(params[:id])
-    @review = Review.find(params[:review_id])
-
-    @review.update({
-      title: params[:title],
-      rating: params[:rating],
-      content: params[:content],
-      picture: params[:picture]
-      })
-      # binding.pry
-      if  @review.save
-        # binding.pry
-        redirect_to "/shelters/#{@review.shelter.id}"
-      else
-        flash[:notice] = "Review not Updated: Require information missing."
-        render :edit
-      end
+    @review = Review.find(params[:id])
+    @shelter = Shelter.find(@review.shelter_id)
+    review = Review.find(params[:id])
+    if review.update(review_params)
+    # if review.save
+    #   # review.update({
+    #   #              title: params[:title],
+    #   #              rating: params[:rating],
+    #   #              content: params[:content],
+    #   #              picture: params[:picture]
+    #   #   })
+      redirect_to "/shelters/#{review.shelter.id}"
+    else
+      flash[:notice] = 'Review Not Created! Make Sure To Fill In Title, Rating, And Content!'
+      render :edit
     end
-    def destroy
-      @review = Review.destroy(params[:review_id])
-      @shelter = Shelter.find(params[:id])
-      # @review = Review.find(params[:review_id])
-      redirect_to "/shelters/#{@shelter.id}"
-    end
-
-  private
-  def review_params
-    params.permit(:title, :rating, :content, :picture)
   end
+
+  def destroy
+    shelter = Review.find(params[:id]).shelter
+    review = Review.find(params[:id])
+    review.destroy
+
+    redirect_to "/shelters/#{shelter.id}"
+  end
+
+    ########### PRIVATE METHODS ###########
+
+    private
+
+    def review_params
+      params.permit(:title, :rating, :content, :picture)
+      # params.permit(:picture, :optional => true)
+    end
 end
