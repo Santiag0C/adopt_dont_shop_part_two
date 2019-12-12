@@ -34,6 +34,11 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def unapprove
+    pet = Pet.find(params[:id_pet])
+    pet.update(status: 'adoptable')
+    redirect_to "/applications/#{pet.applications[0].id}"
+  end
   def update
     params[:pet_ids].each do |pet_id|
       @pet = Pet.find(pet_id)
