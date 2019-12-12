@@ -1,0 +1,15 @@
+<h1>Application</h1>
+  <%= check_box_tag(name, value = "1", checked = false, options = {}) public %>
+  <%= form_tag "/pets/application", method: :patch do %>
+    <p>Edit Shelter Name</p>
+    <%= text_field_tag :name %>
+    <p>Edit Shelter Address</p>
+    <%= text_field_tag :address %>
+    <p>Edit Shelter City</p>
+    <%= text_field_tag :city %>
+    <p>Edit Shelter State</p>
+    <%= text_field_tag :state %>
+    <p>Edit Shelter Zip</p>
+    <%= text_field_tag :zip %>
+    <%= submit_tag 'Submit' %>
+  <% end %>
