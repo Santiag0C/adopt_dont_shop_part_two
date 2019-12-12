@@ -1,24 +1,19 @@
 class Favorite
-  attr_reader :total_c, :hash
-  def initialize(content)
-    @total_c = content || Hash.new(0)
+  attr_reader :contents
+
+  def initialize(initial_contents)
+    @contents =  initial_contents || Hash.new(0)
   end
+
   def total_count
-    @total_c.values.sum
+    @contents.values.sum
   end
-  def add_favorite(id)
-    # binding.pry
-    @total_c[id.to_s] = count_of(id)+1
-  end
-  def count_of(id)
-    @total_c[id.to_s].to_i
-  end
-  def id_finder
-    @pets = Pet.all
-    hash = {}
-    @total_c.each do |key, val|
-    hash[@pets.find(key)]=1
-   end
-   return hash
+
+  def keys_to_i(contents)
+    pet_id_int = []
+    @contents.each do |pet_id, quantity|
+      pet_id_int.push(pet_id.to_i)
+    end
+    pet_id_int
   end
 end
