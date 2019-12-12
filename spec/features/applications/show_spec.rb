@@ -103,7 +103,7 @@ RSpec.describe 'As A Visitor', type: :feature do
     expect(page).to have_link('David Gomez')
   end
 
-  it 'can aprove an application and ' do
+  it 'can aprove an application and change the aprove link for a message' do
     # expect(page).to have_content("Status: adoptable")
 \
 
@@ -117,5 +117,32 @@ RSpec.describe 'As A Visitor', type: :feature do
 
 
   end
+  it 'can show a link to unapprove and if i click it i can aprove the application
+  again also i see that the status has change to adoptable' do
+    visit "pets/#{@elena.id}"
 
+    click_on('David Gomez')
+
+    expect(page).to have_link('Unapprove')
+
+    click_on('Unapprove')
+
+    expect(page).to have_button("Approve Application")
+
+    click_on('Elena')
+
+    expect(page).to have_content("Status: adoptable")
+
+  end
+  # As a visitor
+  # After an application has been approved for a pet
+  # When I visit that applications show page
+  # I no longer see a link to approve the application for that pet
+  # But I see a link to unapprove the application for that pet
+  # When I click on the link to unapprove the application
+  # I'm taken back to that applications show page
+  # And I can see the button to approve the application for that pet again
+  # When I go to that pets show page
+  # I can see that the pets adoption status is now back to adoptable
+  # And that pet is not on hold anymore
 end
