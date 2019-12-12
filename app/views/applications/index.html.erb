@@ -4,6 +4,21 @@
   <% if pet.applications.empty? %>
     <p><%= pet.name %> Does not have any applications.</p>
   <% else %>
-    <%= pet.name %>
+    <p><%= pet.name %></p>
+  <% end %>
+  <% if pet.status == 'pending' %>
+    <% nil %>
+  <% else %>
+    <% pet.applications.each do |application| %>
+    <h3>Applications For This Pet </h3>
+      <p><%= application.name %></p>
+      <p><%= application.address %></p>
+      <p><%= application.city %></p>
+      <p><%= application.state %></p>
+      <p><%= application.zip %></p>
+      <p><%= application.phone_number %></p>
+      <p><%= application.description %></p>
+      <p><%= link_to 'Application Link', "/applications/#{application.id}", method: :get %>
+    <% end %>
   <% end %>
 <% end %>
