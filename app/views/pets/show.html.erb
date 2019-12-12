@@ -5,7 +5,14 @@
   <p>Description: <%= @pet.description %></p>
   <p>Age: <%= @pet.age %></p>
   <p>Sex: <%= @pet.sex %></p>
-  <p>Status: <%= @pet.status %></p>
+
+  <% if @pet.status == 'adoptable' %>
+    <p>Status: <%= @pet.status %></p>
+  <% else  @pet.status == 'pending' %>
+    <p>Status: <%= @pet.status %>
+      <br>
+      <%= "#{@pet.name} is on hold for #{Application.all.last.name}" %>
+  <% end %>
 
   <% if favorites.keys_to_i(@favorites.contents).include? @pet.id %>
       <%= button_to 'Unfavorite!', "/favorites/#{@pet.id}", method: :delete %>
