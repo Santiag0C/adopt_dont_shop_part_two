@@ -10,7 +10,7 @@ class PetsController < ApplicationController
 
   def show
     @pet = Pet.find(params[:id])
-
+    @favorites = favorites()
   end
 
   def new
@@ -19,7 +19,7 @@ class PetsController < ApplicationController
 
   def create
     @shelter = Shelter.find(params[:shelter_id])
-    # binding.pry
+
     Pet.create(pet_params)
 
     redirect_to "/shelters/#{@shelter.id}/pets"
