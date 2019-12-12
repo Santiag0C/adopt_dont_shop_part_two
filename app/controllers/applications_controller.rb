@@ -35,7 +35,6 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    @applicant = applicant()
     params[:pet_ids].each do |pet_id|
       @pet = Pet.find(pet_id)
       @pet.update(status: 'pending')
