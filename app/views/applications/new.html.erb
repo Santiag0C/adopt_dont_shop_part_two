@@ -2,11 +2,11 @@
 
 <h3>Select the pet or pets you would like to apply for</h3>
 <%= form_tag "/applications", method: :post %>
-<%= pet_ids = Array.new %>
+<% pet_ids = Array.new %>
 <% @pets.each do |pet| %>
   <%= label_tag pet.id %>
   <%= link_to pet.name, "/pets/#{pet.id}" %>
-  <section id = "checkbox-#{pet.name}">  
+  <section id = "checkbox-#{pet.name}">
   <%= check_box_tag 'pet_ids[]', pet.id, false, :id => "checkbox-#{pet.id}" %>
   </section>
   <% end %>
